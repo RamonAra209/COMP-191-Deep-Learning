@@ -1,0 +1,24 @@
+* What is independent study?
+This course was taken at the University of the Pacific during the Fall semester of 2022.
+COMP 191 is an independent study course in which any student can enroll into, but what they pursue in their study is unique.
+The student works alongside an appointed professor that has expertise in the topic.
+The student and professor work together to create a course-plan proposal which is then presented to the Dean of the department.
+* Why am I taking part in independent study?
+I have taken a Machine Learning course here at university, and enjoyed it quite a lot. So much so I became a teaching assistant for the class
+However, the class was heavily theory based. Don't get me wrong, theory is incredibly important, but I live by the idea that we /truly/ learn when /doing/.
+My reason for taking part in independent study is to get hands-on experience with ML frameworks.
+* So who are /we/?
+Though the course title emphasizes /independent/ study, this course was taken alongside two of my peers, Ethan Coe-Renner, and Nicolas Ahn.
+We decided to pursue our collective interest in CNN's and Machine Learning as a whole.
+We are working alongside our professor/academic advisor, [[https://engineering.pacific.edu/engineering/directory/amir-mohammadian-sepehr][Dr. Sepehr Amir-Mohammadian]].
+* What will our course entail?
+You can view a copy of the course overview, [[file:SOECS_Independent_Study_Research_Plan.pdf][here]].
+
+As an overview, we will learn about:
+- Using Pytorch in deep learning
+- Tensors and their role in machine learning
+  Fundamentals of training models and their validation
+- Fundamentals of neural networks
+- Convolutional neural networks and their role in image classification
+- Data augmentation
+- Image segmentation
