@@ -1,0 +1,22 @@
+#+title: HW1 Submission
+#+OPTIONS: toc:nil
+
+* What command did you use for version checking python?
+- To check the version I used:
+  #+begin_src bash
+  python3 --version
+  #+end_src
+- Results: Python 3.9.13
+
+* What command did you use for version checking pytorch?
+- Installed with: 'pip3 install torch torchvision'
+- Checked with:
+  - 'pip3 show torch' -> version 1.12.1
+  - 'pip3 show torchvision' -> version 0.13.1
+* Is CUDA available on your machine? What command did you use?
+I'm using an arm-based Macbook Pro, therefore there is on CUDA available to me
+* What command did you use to install Jupyter notebook?
+- Installed with: 'pip3 install notebook'
+* What version of Python is running on the Jupyter notebook server? What command did you use?
+- Checked version with: 'pip3 show notebook'
+- Result: version 6.4.12
