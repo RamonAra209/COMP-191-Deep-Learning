@@ -1,13 +1,11 @@
 #+title: HW1 Submission
 #+OPTIONS: toc:nil
-
 * What command did you use for version checking python?
 - To check the version I used:
   #+begin_src bash
   python3 --version
   #+end_src
 - Results: Python 3.9.13
-
 * What command did you use for version checking pytorch?
 - Installed with: 'pip3 install torch torchvision'
 - Checked with:
@@ -20,3 +18,5 @@ I'm using an arm-based Macbook Pro, therefore there is on CUDA available to me
 * What version of Python is running on the Jupyter notebook server? What command did you use?
 - Checked version with: 'pip3 show notebook'
 - Result: version 6.4.12
+* What should you do to make Jupyter use a specific version of python installed on your machine?
+- Kernel -> Change Kernel

@@ -1,0 +1,103 @@
+#+title: 'Deep Learning with Pytorch' Notes
+#+STARTUP: show2levels
+#+OPTIONS: :toc:2
+
+* Chapter 1
+* Chapter 2
+** Terms to know:
+- Label / Class: The tag that a given image falls into
+  + Ex. if you're given an image of a dog, the label is 'dog'
+** Types of deep learning tasks on images
+- Image classification
+  + Classifying objects within an image
+- Object localization
+  + Identifying objects positions within an image
+- Object detection
+  + Identifying and labeling objects within an image
+- Scene classification
+  + Classifying the given situation within an image
+- Scene parsing
+  + Dividing an image into regions which relate to the contents of the image
+** Steps to classify an image:
+1. Starting image, ex. Dog
+2. Image gets resized and normalized
+   - Preprocessed into a torch.Tensor (vector)
+3. Forward passed into model, outputs a vector of scores
+4. Scores map one-to-one to label
+   - Each score represents the score associated with a given class
+** Getting a pre-trained model for /image recognition/
+- Some good models include:
+  + AlexNet, ResNet, and Inception v3
+
+Models can be found within torchvision.models, theres a bunch of them
+#+begin_src python :results output  :tangle HW2/notes.py
+from torchvision import models
+list_models = dir(models)
+print("Num of models: ", len(list_models))
+print(list_models[0:5])
+print(list_models[170:175])
+#+end_src
+
+#+RESULTS:
+: Num of models:  205
+: ['AlexNet', 'AlexNet_Weights', 'ConvNeXt', 'ConvNeXt_Base_Weights', 'ConvNeXt_Large_Weights']
+: ['resnet50', 'resnext101_32x8d', 'resnext101_64x4d', 'resnext50_32x4d', 'segmentation']
+
+- *NOTE*: Notice how theres both uppercase / lowercase models?
+  + Uppercase represent classes that implement varying amount of models
+  + Lowercase represent /convince/ functions that return an instance of that model type
+    * ex. 'resnet50' returns an instance of model 'resnet' with 50 layers
+
+*** Randomized vs pretrained models
+Initializing the network is as easy as:
+#+begin_src python :tangle  HW2/notes.py
+alexnet = models.AlexNet()
+#+end_src
+However, this creates a randomized AlexNet object, with *no* pretrained weights
+
+We can use one of those handy-dandy /lowercased/ models, which instantiates a model for us with pretrained models.For example, creating instance of resnet with 101 layers:
+#+begin_src python :results output :tangle HW2/notes.py
+resnet = models.resnet101(pretrained=True)
+#+end_src
+*** Preprocessing images via /transforms/
+Prior to using /any/ neural network, we have to process and normalize the input, so the network can work
+When processing images, we can preprocess them with torchvision's /transforms/ module. Here is an example:
+#+begin_src python :results output
+from torchvision import transforms
+
+preprocess = transforms.Compose([
+    transform.Resize(256),          # resizes to 256 x 256
+    transform.CenterCrop(224),      # crops 224 x 224 around center of new image
+    transform.ToTensor(),           # converts image to tensor
+    transform.Normalize(            # normalizes color channels (RGB)
+        mean=[0.485, 0.456, 0.406],
+        std=[0.229, 0.224, 0.225]
+    )
+])
+#+end_src
+*NOTE*: transforms.Compose() returns a tensor with those given parameters
+*** Feeding an into the preprocessing segment
+Lets say you have a dog image located at PATH="~/dog.png". To feed it into the neural network, we would have to:
+1. Preprocess it -> src_python[:exports code]{img_tensor = preprocess(img)}
+2. Create an /inference/ of the neural network we're using
+   - An inference is just putting the NN in an /evaluate/ state where it can produce actual results
+   - Done so by doing src_python[:exports code]{resnet.eval()}
+3. Feeding our src_python[:exports code]{img_tensor} into the NN
+   - src_python[:exports code]{output = resnet(img_tensor)}
+*** Cross referencing the model output with ImageNet Data Labels
+1. Read lines from "imagenet_classes.txt"
+2. Get the maximum score from src_python[:exports code]{output}
+   src_python[:exports code]{_, index = torch.max(output, 1) }
+3. Get the models confidence level for the prediction
+   #+begin_src python :results output
+   percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
+
+   labels[index[o], percentage[index[0]]].item()
+   #+end_src
+   Should output: ('golden retriever', 96.293...)
+   Therefore the model predicted with 96.293% certainty that the dog image was a golden retriever
+4. Listing out the labels of the other predictions
+   #+begin_src python :results output
+   _, indices = torch.sort(out, descending=True)
+   other_predictions_and_percentages = [(labels[idx], percentage[idx].item()) for idx in indices[0][:5]]
+   #+end_src

@@ -8,5 +8,8 @@ tmp/
 build
 htmlcov
 
+venv
+notes.py
 *.tex
 *.pdf
+!SOECS_Independent_Study_Research_Plan.pdf
