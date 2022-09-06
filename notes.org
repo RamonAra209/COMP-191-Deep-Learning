@@ -1,6 +1,17 @@
 #+title: 'Deep Learning with Pytorch' Notes
-#+STARTUP: show2levels
-#+OPTIONS: :toc:2
+#+OPTIONS: show2levels
+
+* Table of Contents :TOC_3:noexport:
+- [[#chapter-1][Chapter 1]]
+- [[#chapter-2][Chapter 2]]
+  - [[#terms-to-know][Terms to know:]]
+  - [[#types-of-deep-learning-tasks-on-images][Types of deep learning tasks on images]]
+  - [[#steps-to-classify-an-image][Steps to classify an image:]]
+  - [[#getting-a-pre-trained-model-for-image-recognition][Getting a pre-trained model for /image recognition/]]
+    - [[#randomized-vs-pretrained-models][Randomized vs pretrained models]]
+    - [[#preprocessing-images-via-transforms][Preprocessing images via /transforms/]]
+    - [[#feeding-an-image-into-the-preprocessing-segment][Feeding an image into the preprocessing segment]]
+    - [[#cross-referencing-the-model-output-with-imagenet-data-labels][Cross referencing the model output with ImageNet Data Labels]]
 
 * Chapter 1
 * Chapter 2
@@ -76,7 +87,7 @@ preprocess = transforms.Compose([
 ])
 #+end_src
 *NOTE*: transforms.Compose() returns a tensor with those given parameters
-*** Feeding an into the preprocessing segment
+*** Feeding an image into the preprocessing segment
 Lets say you have a dog image located at PATH="~/dog.png". To feed it into the neural network, we would have to:
 1. Preprocess it -> ~img_tensor = preprocess(img)~
 2. Create an /inference/ of the neural network we're using
