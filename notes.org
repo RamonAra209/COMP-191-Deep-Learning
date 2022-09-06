@@ -78,16 +78,16 @@ preprocess = transforms.Compose([
 *NOTE*: transforms.Compose() returns a tensor with those given parameters
 *** Feeding an into the preprocessing segment
 Lets say you have a dog image located at PATH="~/dog.png". To feed it into the neural network, we would have to:
-1. Preprocess it -> src_python[:exports code]{img_tensor = preprocess(img)}
+1. Preprocess it -> ~img_tensor = preprocess(img)~
 2. Create an /inference/ of the neural network we're using
    - An inference is just putting the NN in an /evaluate/ state where it can produce actual results
-   - Done so by doing src_python[:exports code]{resnet.eval()}
-3. Feeding our src_python[:exports code]{img_tensor} into the NN
-   - src_python[:exports code]{output = resnet(img_tensor)}
+   - Done so by doing ~resnet.eval()~
+3. Feeding our ~img_tensor~ into the NN
+   - ~output = resnet(img_tensor)~
 *** Cross referencing the model output with ImageNet Data Labels
 1. Read lines from "imagenet_classes.txt"
-2. Get the maximum score from src_python[:exports code]{output}
-   src_python[:exports code]{_, index = torch.max(output, 1) }
+2. Get the maximum score from ~output~
+   ~_, index = torch.max(output, 1)~
 3. Get the models confidence level for the prediction
    #+begin_src python :results output
    percentage = torch.nn.functional.softmax(out, dim=1)[0] * 100
