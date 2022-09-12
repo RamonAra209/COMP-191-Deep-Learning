@@ -14,6 +14,8 @@
     - [[#cross-referencing-the-model-output-with-imagenet-data-labels][Cross referencing the model output with ImageNet Data Labels]]
   - [[#gan---generative-adversarial-networks][GAN - Generative Adversarial Networks]]
     - [[#terms-to-know-1][Terms to know]]
+    - [[#cyclegan][CycleGAN]]
+  - [[#nlp-model-that-describes-scenes][NLP model that describes scenes]]
 
 * Chapter 1
 * Chapter 2
@@ -43,7 +45,7 @@
   + AlexNet, ResNet, and Inception v3
 
 Models can be found within torchvision.models, theres a bunch of them
-#+begin_src python :results output  :tangle HW2/notes.py
+#+begin_src python :results output
 from torchvision import models
 list_models = dir(models)
 print("Num of models: ", len(list_models))
@@ -58,13 +60,13 @@ print(list_models[170:175])
 
 *** Randomized vs pretrained models
 Initializing the network is as easy as:
-#+begin_src python :tangle  HW2/notes.py
+#+begin_src python
 alexnet = models.AlexNet()
 #+end_src
 However, this creates a randomized AlexNet object, with *no* pretrained weights
 
 We can use one of those handy-dandy /lowercased/ models, which instantiates a model for us with pretrained models.For example, creating instance of resnet with 101 layers:
-#+begin_src python :results output :tangle HW2/notes.py
+#+begin_src python :results output
 resnet = models.resnet101(pretrained=True)
 #+end_src
 
@@ -111,9 +113,18 @@ Lets say you have a dog image located at PATH="~/dog.png". To feed it into the n
    other_predictions_and_percentages = [(labels[idx], percentage[idx].item()) for idx in indices[0][:5]]
    #+end_src
 ** GAN - Generative Adversarial Networks
+[[file:imgs/cycleGAN.png][GAN Diagram]]
 Two neural networks that compete against each other, where one produces an output, while the other interprets and identifies the mistakes in the output
 *** Terms to know
 - Generator: produces output from an arbitrary input
   + Its end goal is fool the discriminator with its image outputs
 - Discriminator: analyzes whether or not an input image was fabricated or belongs to a real set of images
   + Its end goal is to /know/ when its being fooled
+*** CycleGAN
+[[file:imgs/cycleGAN.png][CycleGAN Diagram]]
+/Note that the D's in the image are discriminators/
+
+- Can turn images from one domain into images from another (and back)
+  + Ex. turning an image into a Zebra, form a picture of a horse
+** NLP model that describes scenes
+[[file:imgs/nlp_model_background.png][Natural language model for describing scenes within an image]]
